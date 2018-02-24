@@ -1,4 +1,5 @@
-﻿using System;
+//This is the login form 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,23 +20,26 @@ namespace My_Pay_Roll_System
             InitializeComponent();
         }
         
+        //these are the variables for dealing with database
         DataTable dt;
         DataRow dr;
         string code;
 
-
+        //this is for close button
         private void button3_Click(object sender, EventArgs e)
         {
             
             this.Close();
         }
 
+        //this is for clear button
         private void button2_Click(object sender, EventArgs e)
         {
             txtpass.Clear();
             txtuser.Clear();
         }
 
+        //this is for ok button
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -45,6 +49,7 @@ namespace My_Pay_Roll_System
                 code = txtuser.Text;
                 dr = dt.Rows.Find(code);
 
+                //this will check admin accounts
                 if (txtpass.Text == dr["Password"].ToString() && dr["Accountype"].ToString() == "Administrator")
                 {
                     USER_TYPE = "Administrator";
@@ -52,6 +57,7 @@ namespace My_Pay_Roll_System
                     main.Show();
 
                 }
+                //this will check standard accounts
                 else if (txtpass.Text == dr["Password"].ToString() && dr["Accountype"].ToString() == "Standard")
                 {
                     USER_TYPE = "Standard";
@@ -60,6 +66,7 @@ namespace My_Pay_Roll_System
                     
 
                 }
+                // this will run when username or password error
                 else
                 {
                     MessageBox.Show("Invalid password. Try again!", "Invalid Username Password", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -80,7 +87,7 @@ namespace My_Pay_Roll_System
                 dt = my_Pay_Roll_SystemDataSet2.UAC;
                 code = txtuser.Text;
                 dr = dt.Rows.Find(code);
-
+                // only admins can get access to setting form
                 if (txtpass.Text == dr["Password"].ToString() && dr["Accountype"].ToString() == "Administrator")
                 {
 
